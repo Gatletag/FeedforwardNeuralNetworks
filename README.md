@@ -31,7 +31,7 @@ The below image shows a simple diagram of the "Feed forward" component described
 
 ![Perceptron](images/Perceptron.png)
 
-## Training the Neuron
+## Backpropagation
 The error associated with the prediction of the perceptron is calculated by comparying the predicted output `y` to the actual label `y_label`.
 ```
 error = y_label - y
@@ -46,3 +46,13 @@ W_new = W_old + X * error * deriv_activation(output)
 ```
 The derivate of the activation function is used as it is the gradent of the error with respect to the weights. The activation functions such as ReLu, Sigmoid and tanH all have derivatives which only rely on the output value. (more details to follow)
 The input X, error and deriv_activation(output) in the above weight update equation is used to push the Weights in the correct direction. My view is the input X is used as it affects the strength of the error and since it is a dot product with the weights, the input value affects the strength of the affect on the error.
+
+The process of updating the weights with the above weight update equation is a simple example of backpropagation
+
+## Training
+
+Training requires a set of inputs each with an assoicated true output. Process of training involves:
+1. Forward pass
+2. Backpropagate
+3. Update weights
+4. Repeat 1-3 for a number of epochs
