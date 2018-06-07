@@ -17,6 +17,9 @@ class Perceptron():
         error = true_outputs - predicted_outputs
         return error
 
+    def sigmoid_derivative(self, x):
+        return x * (1 - x)
+
     # train the perceptror over several iterations
     # requires an input set with the output true labels
     def train(self, training_set_inputs, training_set_outputs, number_of_training_iterations, learning_rate):
@@ -28,7 +31,7 @@ class Perceptron():
                 error = self.error_calculation(true_output,output)
 
                 # multiplying by input as it is the contribution it has on the error.
-                self.weights[:,0] += learning_rate*error[0]*input
+                self.weights[:,0] += learning_rate*input*error[0]*self.sigmoid_derivative(output)
                 sum_error+=error[0]
             print(sum_error)
 
@@ -44,12 +47,11 @@ if __name__ == "__main__":
 
     perceptron.train(training_set_inputs, training_set_outputs, 10000,0.1)
 
-    print("New synaptic weights after training: ")
+    print("New weights after training: ")
     print(perceptron.weights)
 
     # Test the neural network with a new situation.
-    print("Considering new situation [1, 0, 0] -> ?: ")
-print(perceptron.forward_pass(np.array([0, 0, 1])))
-print(perceptron.forward_pass(np.array([1, 1, 1])))
-print(perceptron.forward_pass(np.array([1, 0, 1])))
-print(perceptron.forward_pass(np.array([0, 1, 0])))
+print("INPUT: ",np.array([0, 0, 1])," & OUTPUT:",perceptron.forward_pass(np.array([0, 0, 1])))
+print("INPUT: ",np.array([1, 1, 1])," & OUTPUT:",perceptron.forward_pass(np.array([1, 1, 1])))
+print("INPUT: ",np.array([1, 0, 1])," & OUTPUT:",perceptron.forward_pass(np.array([1, 0, 1])))
+print("INPUT: ",np.array([0, 1, 1])," & OUTPUT:",perceptron.forward_pass(np.array([0, 1, 1])))
