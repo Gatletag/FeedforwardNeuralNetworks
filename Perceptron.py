@@ -31,7 +31,7 @@ class Perceptron():
                 error = self.error_calculation(true_output,output)
 
                 # multiplying by input as it is the contribution it has on the error.
-                self.weights[:,0] += learning_rate*input*error[0]*self.sigmoid_derivative(output)
+                self.weights[:,0] += input*error[0]*self.sigmoid_derivative(output)
                 sum_error+=error[0]
             print(sum_error)
 
